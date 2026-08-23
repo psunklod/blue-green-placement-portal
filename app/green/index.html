@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Placement Portal - Green Version 2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #064e3b;
+            --bg-body: #022c22;
+            --bg-card: #065f46;
+            --bg-card-hover: #047857;
+            --bg-glass: rgba(6, 78, 59, 0.7);
+            --border-glass: rgba(52, 211, 153, 0.2);
+            --primary-emerald: #10b981;
+            --primary-teal: #14b8a6;
+            --accent-green: #34d399;
+            --text-main: #f0fdf4;
+            --text-muted: #a7f3d0;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Top Banner Header */
+        .version-bar {
+            background: linear-gradient(90deg, #047857, #10b981, #059669);
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .version-badge {
+            background: #ffffff;
+            color: #065f46;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6ee7b7, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--primary-emerald), var(--primary-teal));
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            color: #022c22;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-emerald), var(--primary-teal));
+            color: #022c22;
+            padding: 10px 22px;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 70px 8% 50px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #34d399, #6ee7b7, #a7f3d0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 680px;
+            margin: 0 auto 35px;
+            line-height: 1.6;
+        }
+
+        /* NEW FEATURE: Placement Stats Grid */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-box {
+            background: rgba(6, 95, 70, 0.5);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #34d399;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Companies Grid */
+        .section {
+            padding: 60px 8%;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .company-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-emerald);
+            background: var(--bg-card-hover);
+        }
+
+        .company-logo-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 0 auto 15px;
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-emerald);
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .company-openings {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Jobs Grid */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .job-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-green);
+        }
+
+        .job-tag {
+            align-self: flex-start;
+            background: rgba(52, 211, 153, 0.2);
+            color: #34d399;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .job-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* NEW FEATURE: Highlighted Section */
+        .new-feature-badge {
+            display: inline-block;
+            background: #10b981;
+            color: #022c22;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(2, 44, 34, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            place-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(2, 44, 34, 0.6);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-emerald);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: #021a14;
+            border-top: 1px solid var(--border-glass);
+            padding: 30px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Version Bar -->
+    <div class="version-bar">
+        <span>DEV OPS DEPLOYMENT STATUS:</span>
+        <span class="version-badge">NEW VERSION: GREEN v2.0</span>
+        <span>(LIVE TRAFFIC SWITCHED TO GREEN)</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">A</div>
+            Apex Placement Portal
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#stats">Stats</a></li>
+            <li><a href="#companies">Companies</a></li>
+            <li><a href="#jobs">Job Openings</a></li>
+            <li><a href="#recent-jobs">Recent Jobs</a></li>
+        </ul>
+        <button class="btn-primary" onclick="openModal()">Student Portal</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h1 class="hero-title">Next-Gen Placement Portal <span>Green v2.0 Live</span></h1>
+        <p class="hero-subtitle">Featuring real-time placement analytics, expanded recruiting networks, and AI-matched job recommendations.</p>
+        
+        <!-- Live Placement Stats (NEW IN v2.0) -->
+        <div class="stats-container" id="stats">
+            <div class="stat-box">
+                <div class="stat-value">98.4%</div>
+                <div class="stat-label">Placement Success Rate</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">45 LPA</div>
+                <div class="stat-label">Highest Package Offered</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">120+</div>
+                <div class="stat-label">Active Corporate Partners</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value">15 LPA</div>
+                <div class="stat-label">Average Batch CTC</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="section" id="companies">
+        <div class="section-header">
+            <h2 class="section-title">Top Hiring Partners</h2>
+            <p class="section-desc">Tier-1 companies hiring our graduates</p>
+        </div>
+        <div class="companies-grid">
+            <div class="company-card">
+                <div class="company-logo-placeholder">G</div>
+                <div class="company-name">Google</div>
+                <div class="company-openings">12 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">MS</div>
+                <div class="company-name">Microsoft</div>
+                <div class="company-openings">8 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">A</div>
+                <div class="company-name">Amazon</div>
+                <div class="company-openings">15 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">INF</div>
+                <div class="company-name">Infosys</div>
+                <div class="company-openings">25 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">TCS</div>
+                <div class="company-name">TCS</div>
+                <div class="company-openings">30 Active Positions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION: Recently Added Jobs (Green v2.0 Feature) -->
+    <section class="section" id="recent-jobs" style="background: rgba(6, 78, 59, 0.2); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass);">
+        <div class="section-header">
+            <h2 class="section-title">Recently Added Openings <span class="new-feature-badge">v2.0 NEW</span></h2>
+            <p class="section-desc">Newly published high-tier technology roles</p>
+        </div>
+        <div class="jobs-grid">
+            <div class="job-card" style="border-color: #34d399;">
+                <div>
+                    <span class="job-tag" style="background: #10b981; color: #022c22;">NEW v2.0 ROLE</span>
+                    <h3 class="job-title">AI / ML Research Engineer</h3>
+                    <div class="job-info">
+                        <span>🏢 Google DeepMind Partner</span>
+                        <span>📍 Bengaluru / Remote</span>
+                        <span>💰 28 - 35 LPA</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('AI / ML Research Engineer')">Apply Now</button>
+            </div>
+
+            <div class="job-card" style="border-color: #34d399;">
+                <div>
+                    <span class="job-tag" style="background: #10b981; color: #022c22;">NEW v2.0 ROLE</span>
+                    <h3 class="job-title">Cloud Security Specialist</h3>
+                    <div class="job-info">
+                        <span>🏢 AWS Security Team</span>
+                        <span>📍 Hyderabad</span>
+                        <span>💰 22 - 28 LPA</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Cloud Security Specialist')">Apply Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section class="section" id="jobs">
+        <div class="section-header">
+            <h2 class="section-title">Standard Job Openings</h2>
+            <p class="section-desc">Core campus hiring drives</p>
+        </div>
+        <div class="jobs-grid">
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">FULL-TIME</span>
+                    <h3 class="job-title">Software Engineer</h3>
+                    <div class="job-info">
+                        <span>🏢 Google / Microsoft</span>
+                        <span>📍 Bengaluru / Hybrid</span>
+                        <span>💰 18 - 24 LPA</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Software Engineer')">Apply Position</button>
+            </div>
+
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">FULL-TIME</span>
+                    <h3 class="job-title">Data Analyst</h3>
+                    <div class="job-info">
+                        <span>🏢 Amazon</span>
+                        <span>📍 Hyderabad</span>
+                        <span>💰 12 - 16 LPA</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Data Analyst')">Apply Position</button>
+            </div>
+
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">INTERNSHIP</span>
+                    <h3 class="job-title">DevOps Intern</h3>
+                    <div class="job-info">
+                        <span>🏢 TCS Innovation Labs</span>
+                        <span>📍 Remote / Pune</span>
+                        <span>💰 45,000 / month</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('DevOps Intern')">Apply Position</button>
+            </div>
+
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">INTERNSHIP</span>
+                    <h3 class="job-title">Data Science Intern</h3>
+                    <div class="job-info">
+                        <span>🏢 Infosys Center of Excellence</span>
+                        <span>📍 Mysuru</span>
+                        <span>💰 40,000 / month</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Data Science Intern')">Apply Position</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Application Form -->
+    <div class="modal-overlay" id="appModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h2 style="margin-bottom: 10px; font-size: 1.5rem;">Student Application</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Submit your profile for campus placement consideration.</p>
+            <form id="placementForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" placeholder="e.g. Alex Johnson" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">College Email</label>
+                    <input type="email" id="studentEmail" placeholder="alex@college.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentCollege">College / Department</label>
+                    <input type="text" id="studentCollege" placeholder="School of Computer Science" required>
+                </div>
+                <div class="form-group">
+                    <label for="position">Target Position</label>
+                    <select id="position" required>
+                        <option value="AI / ML Research Engineer">AI / ML Research Engineer (v2.0 New)</option>
+                        <option value="Cloud Security Specialist">Cloud Security Specialist (v2.0 New)</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Data Analyst">Data Analyst</option>
+                        <option value="DevOps Intern">DevOps Intern</option>
+                        <option value="Data Science Intern">Data Science Intern</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Apex Placement Portal — Blue-Green DevOps Infrastructure Project | Green Version 2.0</p>
+    </footer>
+
+    <script>
+        function openModal(role) {
+            if(role) {
+                document.getElementById('position').value = role;
+            }
+            document.getElementById('appModal').style.display = 'grid';
+        }
+
+        function closeModal() {
+            document.getElementById('appModal').style.display = 'none';
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('studentName').value;
+            alert(`[SUCCESS] Thank you ${name}! Your application has been successfully recorded in Green v2.0 system.`);
+            closeModal();
+        }
+    </script>
+</body>
+</html>

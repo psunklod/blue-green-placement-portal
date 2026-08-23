@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex Placement Portal - Blue Version 1.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-glass: rgba(30, 41, 59, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --primary-blue: #3b82f6;
+            --primary-indigo: #6366f1;
+            --accent-cyan: #06b6d4;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Top Banner Header */
+        .version-bar {
+            background: linear-gradient(90deg, #1e3a8a, #2563eb, #1d4ed8);
+            padding: 10px 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .version-badge {
+            background: #ffffff;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-indigo));
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-indigo));
+            color: white;
+            padding: 10px 22px;
+            border-radius: var(--radius-md);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 8% 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, #60a5fa, #a5b4fc, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Companies Grid */
+        .section {
+            padding: 60px 8%;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .company-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .company-logo-placeholder {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0 auto 15px;
+            display: grid;
+            place-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .company-openings {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Jobs Grid */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .job-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.3s;
+        }
+
+        .job-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-indigo);
+        }
+
+        .job-tag {
+            align-self: flex-start;
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .job-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            display: none;
+            place-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-blue);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background: #090d16;
+            border-top: 1px solid var(--border-glass);
+            padding: 30px 8%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Version Bar -->
+    <div class="version-bar">
+        <span>DEV OPS DEPLOYMENT STATUS:</span>
+        <span class="version-badge">CURRENT VERSION: BLUE v1.0</span>
+        <span>(ACTIVE BLUE ENVIRONMENT)</span>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">A</div>
+            Apex Placement Portal
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#companies">Companies</a></li>
+            <li><a href="#jobs">Job Openings</a></li>
+            <li><a href="#apply" onclick="openModal()">Apply Now</a></li>
+        </ul>
+        <button class="btn-primary" onclick="openModal()">Student Portal</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <h1 class="hero-title">Launch Your Career With <span>Top Tech Leaders</span></h1>
+        <p class="hero-subtitle">Welcome to the official college Placement Portal. Connect directly with hiring partners, discover top technology roles, and land your dream job.</p>
+        <button class="btn-primary" style="padding: 14px 32px; font-size: 1.05rem;" onclick="openModal()">Submit Application</button>
+    </section>
+
+    <!-- Companies Section -->
+    <section class="section" id="companies">
+        <div class="section-header">
+            <h2 class="section-title">Top Recruiting Partners</h2>
+            <p class="section-desc">Leading tech companies recruiting directly from our campus</p>
+        </div>
+        <div class="companies-grid">
+            <div class="company-card">
+                <div class="company-logo-placeholder">G</div>
+                <div class="company-name">Google</div>
+                <div class="company-openings">12 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">MS</div>
+                <div class="company-name">Microsoft</div>
+                <div class="company-openings">8 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">A</div>
+                <div class="company-name">Amazon</div>
+                <div class="company-openings">15 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">INF</div>
+                <div class="company-name">Infosys</div>
+                <div class="company-openings">25 Active Positions</div>
+            </div>
+            <div class="company-card">
+                <div class="company-logo-placeholder">TCS</div>
+                <div class="company-name">TCS</div>
+                <div class="company-openings">30 Active Positions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <section class="section" id="jobs" style="background: rgba(30, 41, 59, 0.3);">
+        <div class="section-header">
+            <h2 class="section-title">Current Job Openings</h2>
+            <p class="section-desc">Explore open positions for full-time roles and internships</p>
+        </div>
+        <div class="jobs-grid">
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">FULL-TIME</span>
+                    <h3 class="job-title">Software Engineer</h3>
+                    <div class="job-info">
+                        <span>🏢 Google / Microsoft</span>
+                        <span>📍 Bengaluru / Hybrid</span>
+                        <span>💰 18 - 24 LPA</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Software Engineer')">Apply Position</button>
+            </div>
+
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">FULL-TIME</span>
+                    <h3 class="job-title">Data Analyst</h3>
+                    <div class="job-info">
+                        <span>🏢 Amazon</span>
+                        <span>📍 Hyderabad</span>
+                        <span>💰 12 - 16 LPA</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Data Analyst')">Apply Position</button>
+            </div>
+
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">INTERNSHIP</span>
+                    <h3 class="job-title">DevOps Intern</h3>
+                    <div class="job-info">
+                        <span>🏢 TCS Innovation Labs</span>
+                        <span>📍 Remote / Pune</span>
+                        <span>💰 45,000 / month</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('DevOps Intern')">Apply Position</button>
+            </div>
+
+            <div class="job-card">
+                <div>
+                    <span class="job-tag">INTERNSHIP</span>
+                    <h3 class="job-title">Data Science Intern</h3>
+                    <div class="job-info">
+                        <span>🏢 Infosys Center of Excellence</span>
+                        <span>📍 Mysuru</span>
+                        <span>💰 40,000 / month</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="openModal('Data Science Intern')">Apply Position</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Application Form -->
+    <div class="modal-overlay" id="appModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h2 style="margin-bottom: 10px; font-size: 1.5rem;">Student Application</h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Submit your profile for campus placement consideration.</p>
+            <form id="placementForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" placeholder="e.g. Alex Johnson" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">College Email</label>
+                    <input type="email" id="studentEmail" placeholder="alex@college.edu" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentCollege">College / Department</label>
+                    <input type="text" id="studentCollege" placeholder="School of Computer Science" required>
+                </div>
+                <div class="form-group">
+                    <label for="position">Target Position</label>
+                    <select id="position" required>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="Data Analyst">Data Analyst</option>
+                        <option value="DevOps Intern">DevOps Intern</option>
+                        <option value="Data Science Intern">Data Science Intern</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; padding: 12px;">Submit Application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Apex Placement Portal — Blue-Green DevOps Infrastructure Project | Blue Version 1.0</p>
+    </footer>
+
+    <script>
+        function openModal(role) {
+            if(role) {
+                document.getElementById('position').value = role;
+            }
+            document.getElementById('appModal').style.display = 'grid';
+        }
+
+        function closeModal() {
+            document.getElementById('appModal').style.display = 'none';
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('studentName').value;
+            alert(`[SUCCESS] Thank you ${name}! Your application has been successfully recorded in Blue v1.0 system.`);
+            closeModal();
+        }
+    </script>
+</body>
+</html>

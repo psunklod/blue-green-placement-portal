@@ -1,0 +1,58 @@
+---
+- name: Deploy Blue v1.0 Placement Portal
+  hosts: blue_servers
+  become: yes
+  tasks:
+    - name: Update apt cache and install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure Docker daemon is running and enabled
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create directory for Blue application
+      file:
+        path: /opt/placement-portal-blue
+        state: directory
+        mode: '0755'
+
+    - name: Copy Blue application index.html
+      copy:
+        src: ../app/blue/index.html
+        dest: /opt/placement-portal-blue/index.html
+        mode: '0644'
+
+    - name: Copy Blue Dockerfile
+      copy:
+        src: ../app/blue/Dockerfile
+        dest: /opt/placement-portal-blue/Dockerfile
+        mode: '0644'
+
+    - name: Build Docker image for Blue v1.0
+      command: docker build -t placement-portal:blue /opt/placement-portal-blue
+
+    - name: Stop existing Blue container if running
+      shell: docker stop placement-blue || true && docker rm placement-blue || true
+      ignore_errors: yes
+
+    - name: Run Blue Docker container on port 80
+      command: docker run -d --name placement-blue -p 80:80 --restart always placement-portal:blue
+
+    - name: Verify Blue container health
+      uri:
+        url: http://localhost:80
+        status_code: 200
+      register: blue_health
+      until: blue_health.status == 200
+      retries: 5
+      delay: 2

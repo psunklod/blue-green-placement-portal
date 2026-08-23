@@ -1,0 +1,35 @@
+# ==========================================
+# Terraform State & Local Files
+# ==========================================
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+terraform.tfvars
+.terraform.lock.hcl
+
+# ==========================================
+# SSH Keys & Security Credentials
+# ==========================================
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+aws_credentials.json
+.env
+.env.*
+
+# ==========================================
+# Ansible Retry Files
+# ==========================================
+*.retry
+ansible_inventory.ini
+
+# ==========================================
+# Operating System & IDE Files
+# ==========================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

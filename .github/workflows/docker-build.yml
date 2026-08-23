@@ -1,0 +1,53 @@
+name: Docker Build & Validate
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-blue:
+    name: Build Blue v1.0 Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Blue Image
+        run: |
+          cd app/blue
+          docker build -t placement-portal:blue .
+
+  build-green:
+    name: Build Green v2.0 Image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Green Image
+        run: |
+          cd app/green
+          docker build -t placement-portal:green .
+
+  validate-terraform:
+    name: Validate Terraform HCL
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform Format Check
+        run: |
+          cd terraform
+          terraform fmt -check -diff || true

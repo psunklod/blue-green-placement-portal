@@ -1,0 +1,6 @@
+---
+- name: Master Blue-Green Deployment Playbook
+  import_playbook: blue.yml
+
+- name: Master Green Deployment Playbook
+  import_playbook: green.yml

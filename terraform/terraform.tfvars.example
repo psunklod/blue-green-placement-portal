@@ -1,0 +1,7 @@
+# Sample terraform.tfvars file
+# Copy to terraform.tfvars and adjust as needed
+
+aws_region         = "us-east-1"
+environment_prefix = "placement-portal"
+instance_type      = "t2.micro"
+key_name           = "my-aws-key"

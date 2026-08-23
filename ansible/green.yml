@@ -1,0 +1,58 @@
+---
+- name: Deploy Green v2.0 Placement Portal
+  hosts: green_servers
+  become: yes
+  tasks:
+    - name: Update apt cache and install prerequisites
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - docker.io
+        state: present
+        update_cache: yes
+
+    - name: Ensure Docker daemon is running and enabled
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create directory for Green application
+      file:
+        path: /opt/placement-portal-green
+        state: directory
+        mode: '0755'
+
+    - name: Copy Green application index.html
+      copy:
+        src: ../app/green/index.html
+        dest: /opt/placement-portal-green/index.html
+        mode: '0644'
+
+    - name: Copy Green Dockerfile
+      copy:
+        src: ../app/green/Dockerfile
+        dest: /opt/placement-portal-green/Dockerfile
+        mode: '0644'
+
+    - name: Build Docker image for Green v2.0
+      command: docker build -t placement-portal:green /opt/placement-portal-green
+
+    - name: Stop existing Green container if running
+      shell: docker stop placement-green || true && docker rm placement-green || true
+      ignore_errors: yes
+
+    - name: Run Green Docker container on port 80
+      command: docker run -d --name placement-green -p 80:80 --restart always placement-portal:green
+
+    - name: Verify Green container health
+      uri:
+        url: http://localhost:80
+        status_code: 200
+      register: green_health
+      until: green_health.status == 200
+      retries: 5
+      delay: 2

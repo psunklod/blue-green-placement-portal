@@ -38,15 +38,15 @@
         dest: /opt/placement-portal-blue/Dockerfile
         mode: '0644'
 
-    - name: Build Docker image for Blue v1.0
-      command: docker build -t placement-portal:blue /opt/placement-portal-blue
+    - name: Build Docker image for Blue v1.0 (psunklod/placement-portal:blue)
+      command: docker build -t psunklod/placement-portal:blue /opt/placement-portal-blue
 
     - name: Stop existing Blue container if running
       shell: docker stop placement-blue || true && docker rm placement-blue || true
       ignore_errors: yes
 
     - name: Run Blue Docker container on port 80
-      command: docker run -d --name placement-blue -p 80:80 --restart always placement-portal:blue
+      command: docker run -d --name placement-blue -p 80:80 --restart always psunklod/placement-portal:blue
 
     - name: Verify Blue container health
       uri:

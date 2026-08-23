@@ -1,8 +1,7 @@
 # Script to Build, Tag, and Push Docker Images Globally to Docker Hub
 
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$DockerUsername
+    [string]$DockerUsername = "psunklod"
 )
 
 Write-Host "==================================================" -ForegroundColor Cyan
@@ -34,6 +33,6 @@ docker push $GreenTagV2
 
 Write-Host "`n==================================================" -ForegroundColor Cyan
 Write-Host "[SUCCESS] Docker Images Published Globally on Docker Hub!" -ForegroundColor Green
-Write-Host "  Blue Image : https://hub.docker.com/r/$DockerUsername/placement-portal" -ForegroundColor Cyan
-Write-Host "  Tags       : blue, v1.0, green, v2.0" -ForegroundColor Cyan
+Write-Host "  Repository: https://hub.docker.com/r/$DockerUsername/placement-portal" -ForegroundColor Cyan
+Write-Host "  Tags      : blue, v1.0, green, v2.0" -ForegroundColor Cyan
 Write-Host "==================================================" -ForegroundColor Cyan

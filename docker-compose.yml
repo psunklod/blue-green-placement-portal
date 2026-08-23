@@ -1,8 +1,9 @@
 version: '3.8'
 
 services:
-  # Blue Version 1.0 Container
+  # Blue Version 1.0 Container (Docker Hub: psunklod/placement-portal:blue)
   placement-blue:
+    image: psunklod/placement-portal:blue
     build:
       context: ./app/blue
       dockerfile: Dockerfile
@@ -14,8 +15,9 @@ services:
       - APP_ENV=blue
       - APP_VERSION=1.0
 
-  # Green Version 2.0 Container
+  # Green Version 2.0 Container (Docker Hub: psunklod/placement-portal:green)
   placement-green:
+    image: psunklod/placement-portal:green
     build:
       context: ./app/green
       dockerfile: Dockerfile

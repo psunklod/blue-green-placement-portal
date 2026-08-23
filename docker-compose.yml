@@ -1,6 +1,7 @@
 version: '3.8'
 
 services:
+  # Blue Version 1.0 Container
   placement-blue:
     build:
       context: ./app/blue
@@ -13,6 +14,7 @@ services:
       - APP_ENV=blue
       - APP_VERSION=1.0
 
+  # Green Version 2.0 Container
   placement-green:
     build:
       context: ./app/green
@@ -24,3 +26,18 @@ services:
     environment:
       - APP_ENV=green
       - APP_VERSION=2.0
+
+  # Local Load Balancer Proxy (Simulates AWS ALB on Port 80)
+  placement-lb:
+    build:
+      context: ./app/proxy
+      dockerfile: Dockerfile
+    container_name: placement-portal-lb
+    ports:
+      - "80:80"
+    depends_on:
+      - placement-blue
+      - placement-green
+    restart: always
+    volumes:
+      - ./app/proxy/nginx-blue.conf:/etc/nginx/nginx.conf:ro
